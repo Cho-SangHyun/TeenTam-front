@@ -107,6 +107,7 @@ class AuthService {
             return true;
         }catch(error){
             console.log(error);
+            localStorage.removeItem("user");
             return false;
         }
     }
