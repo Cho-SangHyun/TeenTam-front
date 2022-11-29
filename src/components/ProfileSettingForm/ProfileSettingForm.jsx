@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext } from 'react';
-import { IoReturnUpBackSharp } from 'react-icons/io5';
 import { AUTH } from '../../app';
 import { getSchoolInfo } from '../../services/school_lunch';
 import styles from './ProfileSettingForm.module.css';
