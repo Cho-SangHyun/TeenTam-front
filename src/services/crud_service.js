@@ -99,14 +99,17 @@ class CRUDService {
                 console.log(error);
             })
     }
-    getPostListBySearch(order, page, offset, keyword, setPostList, setPostCount){
-        this.axiosApi.get(`/boards/search-boards/?page=${page}&offset=${offset}&order=${order}&keyword=${keyword}`)
+    getPostListBySearch(order, page, offset, keyword, categoryName, setPostList, setPostCount){
+        const categoryNameQuery = categoryName === "전체 게시판" ? "" : `&category_name=${categoryName}`;
+        const url = `/boards/search-boards/?page=${page}&offset=${offset}&order=${order}&keyword=${keyword}${categoryNameQuery}`;
+        this.axiosApi.get(url)
             .then(response => {
                 setPostList(response.data.data);
                 // 전체 게시글 개수 받아오기
                 setPostCount && setPostCount(response.data.boards_num);
             })
             .catch(error => {
+                setPostList([]);
                 console.log(error);
             })
     }
