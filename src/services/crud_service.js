@@ -99,9 +99,10 @@ class CRUDService {
                 console.log(error);
             })
     }
-    getPostListBySearch(order, page, offset, keyword, categoryName, setPostList, setPostCount){
+    getPostListBySearch(order, page, offset, keyword, writerName, categoryName, setPostList, setPostCount){
         const categoryNameQuery = categoryName === "전체 게시판" ? "" : `&category_name=${categoryName}`;
-        const url = `/boards/search-boards/?page=${page}&offset=${offset}&order=${order}&keyword=${keyword}${categoryNameQuery}`;
+        const searchWay = keyword ? `&keyword=${keyword}` : `&writer_name=${writerName}`;
+        const url = `/boards/search-boards/?page=${page}&offset=${offset}&order=${order}${searchWay}${categoryNameQuery}`;
         this.axiosApi.get(url)
             .then(response => {
                 setPostList(response.data.data);

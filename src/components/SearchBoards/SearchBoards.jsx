@@ -12,6 +12,7 @@ const SearchBoards = (props) => {
     const crudService = useContext(CRUD)
     const location = useLocation();
     const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
+    const writerName = queryData.writer_name;
     const keyword = queryData.keyword;
 
     const [categoryName, setCategoryName] = useState("전체 게시판");
@@ -23,15 +24,23 @@ const SearchBoards = (props) => {
     useEffect(() => {
         setPage(1);
         setFirstPage(1);
-    }, [keyword])
+    }, [keyword, writerName])
 
     useEffect(() => {
-        crudService.getPostListBySearch(ORDER, page, POSTS_PER_PAGE, keyword, categoryName, setPostList, setPostCount);
-    }, [crudService, page, keyword, setPostList, setPostCount, categoryName])
+        crudService.getPostListBySearch(ORDER, page, POSTS_PER_PAGE, keyword, writerName, 
+            categoryName, setPostList, setPostCount);
+    }, [crudService, page, keyword, writerName, setPostList, setPostCount, categoryName])
 
     return(
         <section className={styles.boards_section}>
-            <h1 className={styles.boards_section_title}>"{keyword}"에 대한 검색 결과</h1>
+            <h1 className={styles.boards_section_title}>
+                {
+                    keyword && `"${keyword}"에 대한 검색 결과`
+                }
+                {
+                    writerName && `"${writerName}"님이 작성한 글 검색 결과`
+                }
+            </h1>
             <SearchResultList
                 firstPage={firstPage}
                 postCount={postCount} 

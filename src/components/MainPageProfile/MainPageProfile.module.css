@@ -5,6 +5,7 @@
     border-radius: 8px;
 
     font-family: 'Pretendard';
+    z-index: -1;
 }
 
 .has_user{
