@@ -1,3 +1,5 @@
+import { convertCategoryName } from "./util";
+
 class CRUDService {
     constructor(axiosApi){
         this.axiosApi = axiosApi;
@@ -100,7 +102,8 @@ class CRUDService {
             })
     }
     getPostListBySearch(order, page, offset, keyword, writerName, categoryName, setPostList, setPostCount){
-        const categoryNameQuery = categoryName === "전체 게시판" ? "" : `&category_name=${categoryName}`;
+        const convertedCategoryName = convertCategoryName(categoryName);
+        const categoryNameQuery = categoryName === "전체 게시판" ? "" : `&category_name=${convertedCategoryName}`;
         const searchWay = keyword ? `&keyword=${keyword}` : `&writer_name=${writerName}`;
         const url = `/boards/search-boards/?page=${page}&offset=${offset}&order=${order}${searchWay}${categoryNameQuery}`;
         this.axiosApi.get(url)

@@ -7,6 +7,8 @@ const SearchResultList = ({firstPage, postCount, postList, setFirstPage, setPage
     const handleSelectCategory = (e) => {
         if(e.target.tagName === "LI"){
             setCategoryName(e.target.dataset.value);
+            setFirstPage(1);
+            setPage(1);
         }
     }
 
@@ -45,6 +47,7 @@ const SearchResultList = ({firstPage, postCount, postList, setFirstPage, setPage
                     setFirstPage={setFirstPage} 
                     setPage={setPage}
                     keyword={keyword}
+                    categoryName={categoryName}
                 />
             </div>
         </section>

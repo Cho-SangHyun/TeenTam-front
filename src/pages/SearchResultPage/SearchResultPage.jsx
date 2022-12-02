@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AUTH } from '../../app';
 import SearchBoards from '../../components/SearchBoards/SearchBoards';
@@ -10,6 +10,9 @@ import styles from './SearchResultPage.module.css';
 const SearchResultPage = (props) => {
     const authService = useContext(AUTH);
     const navigate = useNavigate();
+
+    const [firstPage, setFirstPage] = useState(1);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         async function keepLogin(){
@@ -27,9 +30,9 @@ const SearchResultPage = (props) => {
     
     return(
         <section className={styles.boards_page}>
-            <Navbar />
+            <Navbar setPage={setPage} setFirstPage={setFirstPage} />
             <section className={styles.boards_main}>
-                <SearchBoards />
+                <SearchBoards page={page} setPage={setPage} firstPage={firstPage} setFirstPage={setFirstPage} />
                 <MainPageSideSection />
             </section>
             <Footer />

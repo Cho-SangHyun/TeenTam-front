@@ -8,8 +8,8 @@ import SearchResultList from '../SearchResultList/SearchResultList';
 const POSTS_PER_PAGE = 10;
 const ORDER = "pub_date";
 
-const SearchBoards = (props) => {
-    const crudService = useContext(CRUD)
+const SearchBoards = ({page, setPage, firstPage, setFirstPage}) => {
+    const crudService = useContext(CRUD);
     const location = useLocation();
     const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
     const writerName = queryData.writer_name;
@@ -18,13 +18,6 @@ const SearchBoards = (props) => {
     const [categoryName, setCategoryName] = useState("전체 게시판");
     const [postList, setPostList] = useState([]);
     const [postCount, setPostCount] = useState(0);
-    const [firstPage, setFirstPage] = useState(1);
-    const [page, setPage] = useState(1);
-
-    useEffect(() => {
-        setPage(1);
-        setFirstPage(1);
-    }, [keyword, writerName])
 
     useEffect(() => {
         crudService.getPostListBySearch(ORDER, page, POSTS_PER_PAGE, keyword, writerName, 

@@ -8,7 +8,7 @@ import styles from './SearchBar.module.css';
 // 엔터 버튼 누르면 검색결과 페이지로 연결되게끔 이벤트 핸들러 추가해야 함
 // navbar안에 위치할 경우 사이즈 조정에 대한 작업도 필요
 
-const SearchBar = ({isInMainPage}) => {
+const SearchBar = ({ isInMainPage, setPage, setFirstPage }) => {
     const inputRef = useRef();
     const [searchFilterOpen, setSearchFilterOpen] = useState(false);
     const [searchWay, setSearchWay] = useState("keyword");
@@ -20,6 +20,11 @@ const SearchBar = ({isInMainPage}) => {
 
         if (e.key !== "Enter" || !userInput) {
             return;
+        }
+        
+        if (setFirstPage && setPage) {
+            setFirstPage(1);
+            setPage(1);
         }
 
         if (searchWay === "keyword") {
