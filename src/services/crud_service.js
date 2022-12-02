@@ -23,8 +23,8 @@ class CRUDService {
             })
     }
     // 게시글 불러오기
-    getPost(boardsCategory, boardsId, setPost, setCommentsList){
-        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/`)
+    getPost(boardsCategory, boardsId, userId, setPost, setCommentsList){
+        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/?user_id=${userId}`)
             .then(response => {
                 const data = response.data.data;
                 setCommentsList(data.comments);
@@ -42,8 +42,8 @@ class CRUDService {
             })
     }
     // 게시글 불러오기 - 수정을 위해
-    getOldPost(boardsCategory, boardsId, setTitle, setContent){
-        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/`)
+    getOldPost(boardsCategory, boardsId, userId, setTitle, setContent){
+        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/?user_id=${userId}`)
             .then(response => {
                 const data = response.data.data;
                 const { content, title } = data;

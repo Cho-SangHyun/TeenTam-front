@@ -29,7 +29,8 @@ const EditPostPage = (props) => {
                 const res = await authService.refreshAccessToken();
                 if(res){
                     setUser(JSON.parse(userData));
-                    crudService.getOldPost(boardsCategory, boardsId, setTitle, setContent);
+                    const userId = JSON.parse(userData).id;
+                    crudService.getOldPost(boardsCategory, boardsId, userId, setTitle, setContent);
                 }
                 else{
                     alert("로그인이 만료됐습니다. 다시 로그인해주세요");

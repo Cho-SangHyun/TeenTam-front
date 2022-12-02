@@ -40,7 +40,8 @@ const PostDetailPage = (props) => {
             else{
                 const res = await authService.refreshAccessToken();
                 if(res){
-                    crudService.getPost(boardsCategory, boardsId, setPost, setCommentsList);
+                    const userId = JSON.parse(userData).id;
+                    crudService.getPost(boardsCategory, boardsId, userId, setPost, setCommentsList);
                 }
                 else{
                     alert("로그인이 만료됐습니다. 다시 로그인해주세요");
