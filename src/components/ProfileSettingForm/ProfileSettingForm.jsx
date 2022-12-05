@@ -184,7 +184,9 @@ const ProfileSettingForm = ({ user }) => {
                     <option value="3">3학년</option>
                 </select>
             </div>
-            <button className={styles.profile_setting_button} onClick={handleClickProfileSetting} >변경 완료</button>
+            <div className={styles.profile_setting_button_box}>
+                <button className={styles.profile_setting_button} onClick={handleClickProfileSetting} >변경 완료</button>
+            </div>
         </form>
     )
 }

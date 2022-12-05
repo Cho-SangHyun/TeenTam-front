@@ -1,6 +1,5 @@
 .profile_setting_form{
     width: 80%;
-    height: 100%;
     margin: 0 auto;
     position: relative;
 }
@@ -72,4 +71,9 @@
 
 .profile_setting_button:hover{
     transform: translateY(0.2rem);
+}
+
+.profile_setting_button_box{
+    width: 100%;
+    height: 120px;
 }
