@@ -1,0 +1,47 @@
+.profile_image_form{
+    width: 100%;
+    height: 240px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.avatar{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 20px;
+    left: 98px;
+}
+
+#profile_input{
+    display: none;
+}
+
+.profile_upload{
+    width: 100px;
+    height: 32px;
+    background: #F6E9FC;
+    color: #9400DA;
+    border-radius: 8px;
+    border: 0;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: all .2s ease-out;
+
+    position: absolute;
+    left: 330px;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+}
