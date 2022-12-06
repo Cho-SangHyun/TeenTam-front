@@ -5,6 +5,10 @@ const ProfileImageForm = (props) => {
     const [imageURL, setImageURL] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
     const inputRef = useRef();
 
+    const saveImageURL = (e) => {
+        setImageURL(URL.createObjectURL(e.target.files[0]));
+    }
+
     return(
         <form className={styles.profile_image_form}>
             <img 
@@ -15,6 +19,7 @@ const ProfileImageForm = (props) => {
             <input
                 ref={inputRef}
                 id={styles.profile_input}
+                onChange={saveImageURL}
                 type="file"
                 accept="image/*"
                 name="profile_image"
