@@ -212,6 +212,22 @@ class CRUDService {
             })
         
     }
+
+    getMyInfo(userId, setMyInfo, setUsername, setSchool, setGrade) {
+        this.axiosApi.get(`/mypage/${userId}/`)
+            .then(response => {
+                const myInfo = response.data.data;
+                const { username, school, grade } = myInfo;
+                setMyInfo(myInfo);
+                setUsername(username);
+                setSchool(school || "");
+                setGrade(grade || "");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        
+    }
 }
 
 export default CRUDService;
