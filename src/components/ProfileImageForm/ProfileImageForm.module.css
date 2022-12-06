@@ -20,17 +20,17 @@
 }
 
 .profile_upload{
-    width: 100px;
-    height: 32px;
-    background: #F6E9FC;
-    color: #9400DA;
-    border-radius: 8px;
-    border: 0;
+    width: 42px;
+    height: 42px;
+    background: #FFFFFF;
+    color: #2b2b2b;
+    border-radius: 50%;
+    border: 1px solid #DBDBDB;
 
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 24px;
     line-height: 24px;
 
     display: flex;
@@ -41,7 +41,6 @@
     transition: all .2s ease-out;
 
     position: absolute;
-    left: 330px;
-    top: 50%;
-    transform: translate3d(0, -50%, 0);
+    top: 160px;
+    left: 252px;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { IoCamera } from "react-icons/io5";
 import styles from './ProfileImageForm.module.css';
 
 const ProfileImageForm = (props) => {
@@ -15,7 +16,7 @@ const ProfileImageForm = (props) => {
                 src={imageURL} alt="프로필" 
                 className={styles.avatar}
             />
-            <label className={styles.profile_upload} htmlFor={styles.profile_input}>프로필 변경</label>
+            <label className={styles.profile_upload} htmlFor={styles.profile_input}><IoCamera /></label>
             <input
                 ref={inputRef}
                 id={styles.profile_input}
