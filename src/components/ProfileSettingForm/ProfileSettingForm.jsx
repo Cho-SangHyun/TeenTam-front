@@ -2,6 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { useEffect } from 'react';
 import { AUTH, CRUD } from '../../app';
 import { getSchoolInfo } from '../../services/school_lunch';
+import ProfileImageForm from '../ProfileImageForm/ProfileImageForm';
 import styles from './ProfileSettingForm.module.css';
 
 const ProfileSettingForm = (props) => {
@@ -15,12 +16,15 @@ const ProfileSettingForm = (props) => {
         school: "",
         grade: ""
     });
+
     const [username, setUsername] = useState("");
     const [school, setSchool] = useState("");
     const [grade, setGrade] = useState("");
 
     const [isUsernameChecked, setIsUsernameChecked] = useState(true);
     const [isSchoolNameChecked, setIsSchoolNameChecked] = useState(true);
+
+    const profileImageRef = useRef();
 
     useEffect(() => {
         crudService.getMyInfo(user.id, setMyInfo, setUsername, setSchool, setGrade);
@@ -120,10 +124,17 @@ const ProfileSettingForm = (props) => {
 
         const res = window.confirm("저장하시겠습니까?");
         if (res) {
+            settingProfileImage();
             settingUsername();
             settingSchoolName();
             settingGrade();
         }
+    }
+
+    const settingProfileImage = () => {
+        if (profileImageRef.current.files[0]) {
+            crudService.uploadProfileImage(user.id, profileImageRef.current.files[0])
+        };
     }
 
     const settingUsername = () => {
@@ -148,6 +159,7 @@ const ProfileSettingForm = (props) => {
 
     return(
         <form className={styles.profile_setting_form}>
+            <ProfileImageForm ref={profileImageRef} />
             <div className={styles.profile_setting_input_box}>
                 <label className={styles.label} htmlFor={styles.username}>닉네임</label>
                 <input
