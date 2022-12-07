@@ -159,7 +159,7 @@ const ProfileSettingForm = (props) => {
 
     return(
         <form className={styles.profile_setting_form}>
-            <ProfileImageForm ref={profileImageRef} />
+            <ProfileImageForm ref={profileImageRef} userId={user.id} />
             <div className={styles.profile_setting_input_box}>
                 <label className={styles.label} htmlFor={styles.username}>닉네임</label>
                 <input

@@ -238,7 +238,18 @@ class CRUDService {
             headers: {'Content-Type': 'multipart/form-data'}
         })
             .then(response => {
-                console.log(response);
+                window.location.replace("/mypage");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    getProfileImageURL(userId, setImageURL) {
+        this.axiosApi.get(`/mypage/profile-image-url/?user_id=${userId}`)
+            .then(response => {
+                const imageURL = process.env.REACT_APP_BASE_API_URL + response.data.data.profile_image;
+                setImageURL(imageURL);
             })
             .catch(error => {
                 console.log(error);
