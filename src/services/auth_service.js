@@ -19,7 +19,13 @@ class AuthService {
                 // Refresh Token 저장
                 setRefreshToken(refresh_token);
 
-                const userData = response.data.user;
+                let userData = response.data.user;
+                const profileImageURL = process.env.REACT_APP_BASE_API_URL + userData.profile_image;
+                userData = {
+                    ...userData,
+                    profile_image: profileImageURL
+                }
+
                 // localStorage에도 유저 정보 추가
                 localStorage.setItem("user", JSON.stringify(userData));
                 onLogin();

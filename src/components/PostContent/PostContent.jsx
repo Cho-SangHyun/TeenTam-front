@@ -7,6 +7,7 @@ import { getElapsedTime } from '../../services/times';
 import { TbDotsVertical } from "react-icons/tb";
 import { CRUD } from '../../app';
 import styles from './PostContent.module.css';
+import ProfileImage from '../ProfileImage/ProfileImage';
 
 const PostContent = ({post, setPost, category}) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -58,7 +59,9 @@ const PostContent = ({post, setPost, category}) => {
                 )
             }
             <div className={styles.post_info}>
-                <span className={styles.post_writer_icon}></span>
+                <span className={styles.post_writer_icon}>
+                    <ProfileImage userId={post.boards_writer} />
+                </span>
                 <span className={styles.post_writer}>{post?.writer_username}</span>
                 <span className={styles.post_pub_date}>{getElapsedTime(post?.pub_date)}</span>
                 <span className={styles.view_info}>

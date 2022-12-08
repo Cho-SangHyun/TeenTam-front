@@ -10,7 +10,7 @@ import SearchBar from '../SearchBar/SearchBar';
 // 로그인 전 후로 다른 모습 보여주도록 추후 작업이 필요
 // 각 메뉴들을 클릭했을 때 해당 페이지로 연결하도록 하는 작업도 필요
 
-const Navbar = (props) => {
+const Navbar = ({ setPage, setFirstPage }) => {
     const [user, setUser] = useState(null);
     const authService = useContext(AUTH);
 
@@ -40,7 +40,11 @@ const Navbar = (props) => {
                     <Link to="/boards" className={styles.navbar_menu_name}>급식타임</Link>
                 </ul>
                 {
-                    (location.pathname !== "/") && <SearchBar isInMainPage={false}/>
+                    (location.pathname !== "/") && <SearchBar 
+                        isInMainPage={false} 
+                        setFirstPage={setFirstPage} 
+                        setPage={setPage} 
+                    />
                 }
                 <div className={styles.navbar_button_list}>
                     {

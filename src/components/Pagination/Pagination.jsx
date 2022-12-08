@@ -53,7 +53,7 @@ const PageButtons = ({firstPage, lastPage, }) => {
     )
 }
 
-const Pagination = ({category, firstPage, postCount, setFirstPage, setPage, keyword}) => {
+const Pagination = ({category, firstPage, postCount, setFirstPage, setPage, keyword, categoryName}) => {
     const [lastPage, lastFirstPage] = getLastFirstPage(postCount);
     const firstPageRef = useRef();
 
@@ -106,7 +106,7 @@ const Pagination = ({category, firstPage, postCount, setFirstPage, setPage, keyw
         const newCurrent = firstPageRef.current;
         removeStyleFromButton(newCurrent);
         addStyleToButton(newCurrent);
-    }, [category, firstPage, keyword])
+    }, [category, firstPage, keyword, categoryName])
 
     return(
         <ul className={styles.pagination} onClick={handleClickButton} >

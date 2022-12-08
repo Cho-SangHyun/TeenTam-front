@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ProfileImage from '../ProfileImage/ProfileImage';
 import styles from './MainPageProfile.module.css';
 
 // 메인페이지 우측 MainPageSideSection 컴포넌트에서 프로필을 보여주는 컴포넌트
@@ -13,7 +14,9 @@ const MainPageProfile = ({ user }) => {
                 user ? (
                     <>
                         <div className={styles.profile}>
-                            <span className={styles.profile_image}>🤪</span>
+                            <span className={styles.profile_image}>
+                                <ProfileImage userId={user.id} />
+                            </span>
                             <span className={styles.intro_message}>안녕하세요,<br/>{user.username}님!</span>
                         </div>
                         <div className={styles.user_info}>

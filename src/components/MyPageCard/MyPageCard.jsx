@@ -1,4 +1,3 @@
-import { tab } from '@testing-library/user-event/dist/tab';
 import React, { useState } from 'react';
 import MyPageContent from '../MyPageContent/MyPageContent';
 import MyPageTabBar from '../MyPageTabBar/MyPageTabBar';

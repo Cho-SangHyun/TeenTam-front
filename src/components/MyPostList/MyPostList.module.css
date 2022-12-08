@@ -1,0 +1,140 @@
+.post_list_section{
+    width: 100%;
+    margin-top: 48px;
+    position: relative;
+}
+
+.button_list{
+    width: 258px;
+    height: 32px;
+
+    position: absolute;
+    right: 0;
+    transform: translate3d(0, -50%, 0); 
+}
+
+.dropdown_order_menu{
+    display: inline-block;
+    width: 100px;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.dropdown_order_menu:hover .order_list{
+    display: block;
+}
+
+.set_order_button{
+    display: flex;
+    width: 100px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666666;
+
+    cursor: pointer;
+}
+
+.order_list{
+    display: none;
+    z-index: 1;
+
+    width: 100px;
+    height: 108px;
+
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+
+    margin: 0;
+    margin-top: 4px;
+    padding: 0;
+    list-style: none;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666666;
+}
+
+.order{
+    width: 100%;
+    height: 36px;
+    padding-left: 16px;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.order:hover{
+    background: #dddddd;
+}
+
+.go_to_write_post{
+    display: flex;
+    width: 150px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+
+    background: #AC0BF8;
+    border-radius: 4px;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    transition: all .2s ease-out;
+}
+
+.go_to_write_post:hover{
+    transform: translateY(0.2rem);
+}
+
+.post_count_introduce{
+    margin: 0;
+    margin-bottom: 8px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+}
+
+.post_count{
+    color: #AC0BF8;
+}
+
+.post_list{
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+}
+
+.pagination{
+    width: 324px;
+
+    margin: 48px auto 200px;
+}

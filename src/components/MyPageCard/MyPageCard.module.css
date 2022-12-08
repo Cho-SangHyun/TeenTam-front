@@ -1,5 +1,7 @@
 .mypage_card{
     width: 1168px;
+    height: auto;
+    min-height: 680px;
     margin: 32px auto 32px;
     font-family: 'Pretendard';
 }
@@ -18,6 +20,5 @@
 
 .mypage_section{
     width: 100%;
-    height: 700px;
     display: flex;
 }

@@ -1,22 +1,38 @@
 import React, { useState, useRef, useContext } from 'react';
-import { IoReturnUpBackSharp } from 'react-icons/io5';
-import { AUTH } from '../../app';
+import { useEffect } from 'react';
+import { AUTH, CRUD } from '../../app';
 import { getSchoolInfo } from '../../services/school_lunch';
+import ProfileImageForm from '../ProfileImageForm/ProfileImageForm';
 import styles from './ProfileSettingForm.module.css';
 
-const ProfileSettingForm = ({ user }) => {
+const ProfileSettingForm = (props) => {
     const authService = useContext(AUTH);
+    const crudService = useContext(CRUD);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-    const [username, setUsername] = useState(user.username);
-    const [schoolName, setSchoolName] = useState(user.school || "");
-    const [grade, setGrade] = useState("0");
+    const [myInfo, setMyInfo] = useState({
+        username: "",
+        email: "",
+        school: "",
+        grade: ""
+    });
+
+    const [username, setUsername] = useState("");
+    const [school, setSchool] = useState("");
+    const [grade, setGrade] = useState("");
 
     const [isUsernameChecked, setIsUsernameChecked] = useState(true);
     const [isSchoolNameChecked, setIsSchoolNameChecked] = useState(true);
 
+    const profileImageRef = useRef();
+
+    useEffect(() => {
+        crudService.getMyInfo(user.id, setMyInfo, setUsername, setSchool, setGrade);
+    }, [user, crudService, setMyInfo, setUsername, setSchool, setGrade])
+
     const errorRef = {
         usernameErrorRef: useRef(),
-        schoolNameErrorRef: useRef(),
+        schoolErrorRef: useRef(),
         gradeErrorRef: useRef()
     }
 
@@ -27,7 +43,7 @@ const ProfileSettingForm = ({ user }) => {
 
     const handleChangeSchoolName = (e) => {
         const newSchoolName = e.target.value.trim();
-        setSchoolName(newSchoolName);
+        setSchool(newSchoolName);
     }
 
     const handleChangeGrade = (e) => {
@@ -36,7 +52,7 @@ const ProfileSettingForm = ({ user }) => {
     }
 
     const handleBlurUsernameInput = async (e) => {
-        if (username === user.username) {
+        if (username === myInfo.username) {
             setIsUsernameChecked(true);
             return;
         }
@@ -62,28 +78,28 @@ const ProfileSettingForm = ({ user }) => {
     }
 
     const handleBlurSchoolNameInput = async (e) => {
-        if (!schoolName) {
+        if (!school) {
             setIsSchoolNameChecked(true);
             return;
         }
-        if (schoolName.slice(-4) !== "고등학교") {
+        if (school.slice(-4) !== "고등학교") {
             setIsSchoolNameChecked(false);
-            errorRef.schoolNameErrorRef.current.classList.remove(styles.done_check);
+            errorRef.schoolErrorRef.current.classList.remove(styles.done_check);
             errorRef[e.target.name + 'ErrorRef'].current.innerText = "입력하신 학교명이 올바르지 않습니다";    
             return;
         }
-        if (user.school && schoolName === user.school) {
+        if (myInfo.school && school === myInfo.school) {
             return;
         }
 
         try {
-            const checkResult = await getSchoolInfo(schoolName);
+            const checkResult = await getSchoolInfo(school);
             setIsSchoolNameChecked(true);
-            errorRef.schoolNameErrorRef.current.classList.add(styles.done_check);
+            errorRef.schoolErrorRef.current.classList.add(styles.done_check);
             errorRef[e.target.name + 'ErrorRef'].current.innerText = "✔ 입력하신 학교에 대한 정보가 존재합니다";
         } catch (error) {
             setIsSchoolNameChecked(false);
-            errorRef.schoolNameErrorRef.current.classList.remove(styles.done_check);
+            errorRef.schoolErrorRef.current.classList.remove(styles.done_check);
             errorRef[e.target.name + 'ErrorRef'].current.innerText = "입력하신 학교에 대한 정보가 존재하지 않습니다";    
         }
     }
@@ -108,23 +124,30 @@ const ProfileSettingForm = ({ user }) => {
 
         const res = window.confirm("저장하시겠습니까?");
         if (res) {
+            settingProfileImage();
             settingUsername();
             settingSchoolName();
             settingGrade();
         }
     }
 
+    const settingProfileImage = () => {
+        if (profileImageRef.current.files[0]) {
+            crudService.uploadProfileImage(user.id, profileImageRef.current.files[0])
+        };
+    }
+
     const settingUsername = () => {
-        if (username !== user.username) {
+        if (username !== myInfo.username) {
             console.log("닉네임 변경 완료");
         }
     }
 
     const settingSchoolName = () => {
-        if (!schoolName && !user.school) {
+        if (!school && !myInfo.school) {
             return;
         }
-        if (schoolName === user.school) {
+        if (school === myInfo.school) {
             return;
         }
         console.log("학교명 변경 완료");
@@ -136,6 +159,7 @@ const ProfileSettingForm = ({ user }) => {
 
     return(
         <form className={styles.profile_setting_form}>
+            <ProfileImageForm ref={profileImageRef} userId={user.id} />
             <div className={styles.profile_setting_input_box}>
                 <label className={styles.label} htmlFor={styles.username}>닉네임</label>
                 <input
@@ -154,7 +178,7 @@ const ProfileSettingForm = ({ user }) => {
             <div className={styles.profile_setting_input_box}>
                 <label className={styles.label} htmlFor={styles.email}>이메일</label>
                 <input 
-                    value={user.email}
+                    value={myInfo.email}
                     disabled={true}
                     className={styles.profile_setting_input} 
                     id={styles.email} 
@@ -165,27 +189,34 @@ const ProfileSettingForm = ({ user }) => {
             <div className={styles.profile_setting_input_box}>
                 <label className={styles.label} htmlFor={styles.schoolName}>학교</label>
                 <input
-                    value={schoolName}
+                    value={school}
                     onFocus={handleFocusInput}
                     onChange={handleChangeSchoolName}
                     onBlur={handleBlurSchoolNameInput}
                     className={styles.profile_setting_input} 
                     id={styles.schoolName} 
                     type="text" 
-                    name="schoolName"
+                    name="school"
                 />
-                <p className={styles.error_message} ref={errorRef.schoolNameErrorRef}></p>
+                <p className={styles.error_message} ref={errorRef.schoolErrorRef}></p>
             </div>
             <div className={styles.profile_setting_input_box}>
                 <label className={styles.label} htmlFor={styles.grade}>학년</label>
-                <select id={styles.grade} className={styles.profile_setting_input} onChange={handleChangeGrade} value={grade}>
+                <select 
+                    id={styles.grade} 
+                    className={styles.profile_setting_input} 
+                    onChange={handleChangeGrade} 
+                    value={grade}
+                >
                     <option value="0">선택 안 함</option>
                     <option value="1">1학년</option>
                     <option value="2">2학년</option>
                     <option value="3">3학년</option>
                 </select>
             </div>
-            <button className={styles.profile_setting_button} onClick={handleClickProfileSetting} >변경 완료</button>
+            <div className={styles.profile_setting_button_box}>
+                <button className={styles.profile_setting_button} onClick={handleClickProfileSetting} >변경 완료</button>
+            </div>
         </form>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CRUD } from '../../app';
-import PostList from '../PostList/PostList';
+import MyPostList from '../MyPostList/MyPostList';
 import styles from './MyBoards.module.css';
 
 // category : 카테고리
@@ -28,7 +28,7 @@ const MyBoards = (props) => {
     return(
         <section className={styles.my_boards_section}>
             <h1 className={styles.my_boards_section_title}>내가 쓴 글</h1>
-            <PostList 
+            <MyPostList 
                 firstPage={firstPage}
                 postCount={postCount} 
                 postList={postList} 

@@ -5,6 +5,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { BiLike } from "react-icons/bi";
 import { BsChatDots } from "react-icons/bs";
 import styles from './PostCard.module.css';
+import ProfileImage from '../ProfileImage/ProfileImage';
 
 // 댓글 개수도 가져올 수 있어야 함!
 
@@ -30,7 +31,9 @@ const PostCard = ({ post }) => {
             <p className={styles.post_content}>{post.content}</p>
             <div className={styles.post_info}>
                 <span className={styles.writer_info}>
-                    <span className={styles.post_writer_icon}></span>
+                    <span className={styles.post_writer_icon}>
+                        <ProfileImage userId={post.boards_writer} />
+                    </span>
                     <span className={styles.post_writer}>{post.username}</span>
                 </span>
                 <span className={styles.post_pub_date}>{getElapsedTime(post.pub_date)}</span>

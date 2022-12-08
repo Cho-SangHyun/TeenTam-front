@@ -1,3 +1,5 @@
+import { convertCategoryName } from "./util";
+
 class CRUDService {
     constructor(axiosApi){
         this.axiosApi = axiosApi;
@@ -21,8 +23,8 @@ class CRUDService {
             })
     }
     // 게시글 불러오기
-    getPost(boardsCategory, boardsId, setPost, setCommentsList){
-        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/`)
+    getPost(boardsCategory, boardsId, userId, setPost, setCommentsList){
+        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/?user_id=${userId}`)
             .then(response => {
                 const data = response.data.data;
                 setCommentsList(data.comments);
@@ -40,8 +42,8 @@ class CRUDService {
             })
     }
     // 게시글 불러오기 - 수정을 위해
-    getOldPost(boardsCategory, boardsId, setTitle, setContent){
-        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/`)
+    getOldPost(boardsCategory, boardsId, userId, setTitle, setContent){
+        this.axiosApi.get(`/boards/${boardsCategory}/id/${boardsId}/?user_id=${userId}`)
             .then(response => {
                 const data = response.data.data;
                 const { content, title } = data;
@@ -99,14 +101,19 @@ class CRUDService {
                 console.log(error);
             })
     }
-    getPostListBySearch(order, page, offset, keyword, setPostList, setPostCount){
-        this.axiosApi.get(`/boards/search-boards/?page=${page}&offset=${offset}&order=${order}&keyword=${keyword}`)
+    getPostListBySearch(order, page, offset, keyword, writerName, categoryName, setPostList, setPostCount){
+        const convertedCategoryName = convertCategoryName(categoryName);
+        const categoryNameQuery = categoryName === "전체 게시판" ? "" : `&category_name=${convertedCategoryName}`;
+        const searchWay = keyword ? `&keyword=${keyword}` : `&writer_name=${writerName}`;
+        const url = `/boards/search-boards/?page=${page}&offset=${offset}&order=${order}${searchWay}${categoryNameQuery}`;
+        this.axiosApi.get(url)
             .then(response => {
                 setPostList(response.data.data);
                 // 전체 게시글 개수 받아오기
                 setPostCount && setPostCount(response.data.boards_num);
             })
             .catch(error => {
+                setPostList([]);
                 console.log(error);
             })
     }
@@ -204,6 +211,49 @@ class CRUDService {
                 console.log(error);
             })
         
+    }
+
+    getMyInfo(userId, setMyInfo, setUsername, setSchool, setGrade) {
+        this.axiosApi.get(`/mypage/${userId}/`)
+            .then(response => {
+                const myInfo = response.data.data;
+                const { username, school, grade } = myInfo;
+                setMyInfo(myInfo);
+                setUsername(username);
+                setSchool(school || "");
+                setGrade(grade || "");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        
+    }
+
+    uploadProfileImage(userId, profileImage) {
+        const form = new FormData();
+        form.append("user_id", userId);
+        form.append("profile_image", profileImage);
+        
+        this.axiosApi.post("/mypage/profile-image-upload/", form, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+            .then(response => {
+                window.location.replace("/mypage");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    getProfileImageURL(userId, setImageURL) {
+        this.axiosApi.get(`/mypage/profile-image-url/?user_id=${userId}`)
+            .then(response => {
+                const imageURL = process.env.REACT_APP_BASE_API_URL + response.data.data.profile_image;
+                setImageURL(imageURL);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 }
 
