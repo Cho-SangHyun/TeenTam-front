@@ -3,6 +3,7 @@ import { CRUD } from '../../app';
 import { getElapsedTime } from '../../services/times';
 import { BiTrashAlt } from "react-icons/bi";
 import styles from './Comment.module.css';
+import ProfileImage from '../ProfileImage/ProfileImage';
 
 const Comment = ({ comment, onDelete }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -29,7 +30,9 @@ const Comment = ({ comment, onDelete }) => {
                         </>
                     )
                 }
-                <div className={styles.comment_writer_image}></div>
+                <div className={styles.comment_writer_image}>
+                    <ProfileImage userId={comment.comments_writer} />
+                </div>
             </div>
             <pre className={`${styles.comment_content} ${comment.delete_date && styles.delete_message}`}>
                 {!comment.delete_date ? comment.content : "삭제된 댓글입니다."}

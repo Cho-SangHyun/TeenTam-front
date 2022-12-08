@@ -28,10 +28,10 @@
 }
 
 .profile_image{
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28px;
+    font-size: 28px; */
 
     width: 64px;
     height: 64px;

@@ -232,7 +232,7 @@ class CRUDService {
     uploadProfileImage(userId, profileImage) {
         const form = new FormData();
         form.append("user_id", userId);
-        form.append("profile_img", profileImage);
+        form.append("profile_image", profileImage);
         
         this.axiosApi.post("/mypage/profile-image-upload/", form, {
             headers: {'Content-Type': 'multipart/form-data'}
