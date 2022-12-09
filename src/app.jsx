@@ -7,10 +7,11 @@ import WritePostPage from './pages/WritePostPage/WritePostPage';
 import EditPostPage from './pages/EditPostPage/EditPostPage';
 import PostDetailPage from './pages/PostDetailPage/PostDetailPage';
 import BoardsPage from './pages/BoardsPage/BoardsPage';
-import './app.css';
 import SearchResultPage from './pages/SearchResultPage/SearchResultPage';
 import MyPage from './pages/MyPage/MyPage';
 import MyBoardsPage from './pages/MyBoardsPage/MyBoardsPage';
+import TimeTablePage from './pages/TimeTablePage/TimeTablePage';
+import './app.css';
 
 export const CRUD = React.createContext(null);
 export const AUTH = React.createContext(null);
@@ -32,6 +33,7 @@ function App({authService, crudService}) {
             <Route path="/boards/search" element={<SearchResultPage />}/>
             <Route path="/mypage" element={<MyPage />}/>
             <Route path="/myboardslist" element={<MyBoardsPage />}/>
+            <Route path="/timetable" element={<TimeTablePage />}/>
           </Routes>
         </CRUD.Provider>
       </AUTH.Provider>

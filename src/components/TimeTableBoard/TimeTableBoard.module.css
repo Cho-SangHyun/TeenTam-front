@@ -1,0 +1,18 @@
+.time_table_board{
+    flex: 1;
+    width: 1168px;
+    margin: 0px auto 32px;
+    font-family: 'Pretendard';
+}
+
+.time_table_board_title{
+    height: 42px;
+    margin-top: 28px;
+    margin-bottom: 32px;
+    
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #000000;
+}
