@@ -1,0 +1,30 @@
+.message_list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    width: 348px;
+    height: 72vh;
+    margin-right: 10px;
+    border-radius: 16px;
+    border: 1px solid #DBDBDB;
+
+    overflow-y: auto;
+}
+
+.list_item{
+    height: 70px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all .1s ease-out;
+    color: #222222;
+}
+
+.list_item:hover{
+    background-color: #DBDBDB;
+}
+
+.opponent_name{
+    font-size: 18px;
+    font-weight: 500;
+}

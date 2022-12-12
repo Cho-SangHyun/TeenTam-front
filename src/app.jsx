@@ -11,6 +11,7 @@ import SearchResultPage from './pages/SearchResultPage/SearchResultPage';
 import MyPage from './pages/MyPage/MyPage';
 import MyBoardsPage from './pages/MyBoardsPage/MyBoardsPage';
 import TimeTablePage from './pages/TimeTablePage/TimeTablePage';
+import MessagePage from './pages/MessagePage/MessagePage';
 import './app.css';
 
 export const CRUD = React.createContext(null);
@@ -34,6 +35,7 @@ function App({authService, crudService}) {
             <Route path="/mypage" element={<MyPage />}/>
             <Route path="/myboardslist" element={<MyBoardsPage />}/>
             <Route path="/timetable" element={<TimeTablePage />}/>
+            <Route path="/message" element={<MessagePage />}/>
           </Routes>
         </CRUD.Provider>
       </AUTH.Provider>

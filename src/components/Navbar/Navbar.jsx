@@ -37,7 +37,7 @@ const Navbar = ({ setPage, setFirstPage }) => {
                 <ul className={styles.navbar_menu}>
                     <Link to="/boards" className={styles.navbar_menu_name}>커뮤니티</Link>
                     <Link to="/timetable" className={styles.navbar_menu_name}>시간표</Link>
-                    <Link to="/boards" className={styles.navbar_menu_name}>쪽지함</Link>
+                    <Link to="/message" className={styles.navbar_menu_name}>쪽지함</Link>
                 </ul>
                 {
                     (location.pathname !== "/") && <SearchBar 
