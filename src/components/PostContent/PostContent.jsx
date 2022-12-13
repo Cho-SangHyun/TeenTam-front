@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BiLike } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsChatDots } from "react-icons/bs";
+import { FiSend } from "react-icons/fi";
 import { getElapsedTime } from '../../services/times';
 import { TbDotsVertical } from "react-icons/tb";
 import { CRUD } from '../../app';
@@ -18,6 +19,10 @@ const PostContent = ({post, setPost, category}) => {
     // 좋아요
     const handleClickLike = () => {
         crudService.updatePostLike(user.id, post.boards_id, setPost);
+    }
+    // 쪽지
+    const handleClickSendNote = () => {
+        alert("쪽지를 보냅니다!");
     }
     // 더보기 클릭 시(점 세개짜리)
     const handleClickMore = () => {
@@ -79,6 +84,11 @@ const PostContent = ({post, setPost, category}) => {
             </div>
             <div className={styles.empty_box}></div>
             <pre className={styles.post_content}>{post?.content}</pre>
+            {
+                (post?.boards_writer !== user?.id) && <button className={styles.send_note_button} onClick={handleClickSendNote} >
+                <FiSend className={styles.send_note_icon} /> &nbsp;쪽지
+            </button>
+            }
             <button className={styles.like_button} onClick={handleClickLike} >
                 <BiLike className={styles.like_icon} /> &nbsp;공감
             </button>
