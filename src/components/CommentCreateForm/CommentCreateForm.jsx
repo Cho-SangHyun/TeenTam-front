@@ -25,6 +25,7 @@ const CommentCreateForm = ({ boardsId, onCreate }) => {
         const comment = commentRef.current.value;
         if(validate(comment)){
             crudService.createComment(user.id, boardsId, comment, onCreate);
+            commentRef.current.value = "";
         }
     }
 
