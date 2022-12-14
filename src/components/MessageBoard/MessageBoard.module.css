@@ -32,3 +32,30 @@
     overflow-y: auto;
 }
 
+.icons{
+    position: absolute;
+    top: 14px;
+    right: 30px;
+
+    display: flex;
+    align-items: center;
+    color: #be3dfa;
+}
+
+.send_icon{
+    font-size: 20px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.refresh_icon{
+    font-size: 24px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.remove_icon{
+    font-size: 21px;
+    cursor: pointer;
+}
+
