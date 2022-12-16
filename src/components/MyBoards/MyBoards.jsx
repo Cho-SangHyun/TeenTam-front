@@ -23,7 +23,7 @@ const MyBoards = (props) => {
 
     useEffect(() => {
         crudService.getMyPostsList(user.id, page, setPostList, setPostCount);
-    }, [crudService, page, setPostList, setPostCount])
+    }, [crudService, page, setPostList, setPostCount, user])
 
     return(
         <section className={styles.my_boards_section}>

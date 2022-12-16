@@ -255,6 +255,47 @@ class CRUDService {
                 console.log(error);
             })
     }
+
+    sendMessage(receiver, sender, content, closeModal, refreshMessages) {
+        const data = {
+            sender,
+            receiver,
+            content
+        }
+
+        const res = window.confirm("쪽지를 보내시겠습니까?");
+        if (res) {
+            this.axiosApi.post("/notes/", data)
+                .then(response => {
+                    closeModal();
+                    refreshMessages && refreshMessages();
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+    }
+
+    getOpponents(userId, setOpponents) {
+        this.axiosApi.get(`/notes/?user_id=${userId}`)
+            .then(response => {
+                setOpponents(response.data.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        
+    }
+
+    getMessages(userId, opponentId, setMessages) {
+        this.axiosApi.get(`/notes/content/?user_id=${userId}&notes_user_id=${opponentId}`)
+            .then(response => {
+                setMessages(response.data.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 }
 
 export default CRUDService;

@@ -1,0 +1,38 @@
+.message_list{
+    margin: 0;
+    padding: 15px 0;
+    list-style: none;
+
+    width: 348px;
+    height: 72vh;
+    margin-right: 10px;
+    border-radius: 16px;
+    border: 1px solid #DBDBDB;
+
+    overflow-y: auto;
+}
+
+.list_item{
+    display: flex;
+    height: 70px;
+    padding: 15px;
+    cursor: pointer;
+    color: #222222;
+    align-items: center;
+}
+
+.opponent_profile{
+    width: 45px;
+    height: 45px;
+    margin-right: 16px;
+}
+
+.list_item.selected{
+    background-color: #be3dfa;
+    color: #ffffff;
+}
+
+.opponent_name{
+    font-size: 18px;
+    font-weight: 400;
+}

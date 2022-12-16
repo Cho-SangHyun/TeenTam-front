@@ -1,0 +1,32 @@
+.message_page{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100%;
+}
+
+.message_box{
+    flex: 1;
+    width: 1168px;
+    margin: 0px auto;
+    font-family: 'Pretendard';
+    display: flex;
+    flex-direction: column;
+}
+
+.message_box_title{
+    height: 42px;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #000000;
+}
+
+.message_container{
+    flex: 1;
+    display: flex;
+}

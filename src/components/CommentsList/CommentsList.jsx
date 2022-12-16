@@ -2,7 +2,7 @@ import React from 'react';
 import Comment from '../Comment/Comment';
 import styles from './CommentsList.module.css';
 
-const CommentsList = ({ commentsList, setCommentsList }) => {
+const CommentsList = ({ commentsList, setCommentsList, openModal, setReceiverId }) => {
     const onDelete = (deleteCommentId) => {
         const newCommentsList = commentsList.map(comment => {
             if (comment.id === deleteCommentId) 
@@ -18,7 +18,13 @@ const CommentsList = ({ commentsList, setCommentsList }) => {
             <div className={styles.comments_list}>
             {
                 commentsList.map(comment => {
-                    return <Comment key={comment.id} comment={comment} onDelete={onDelete} />
+                    return <Comment 
+                        key={comment.id} 
+                        comment={comment} 
+                        onDelete={onDelete} 
+                        openModal={openModal} 
+                        setReceiverId={setReceiverId} 
+                    />
                 })
             }
             </div>

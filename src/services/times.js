@@ -25,3 +25,14 @@ export const getElapsedTime = (date) => {
   // 모든 단위가 맞지 않을 시
   return "방금 전";
 }
+
+export const getCovertedTime = (date) => {
+  const convertedDate = date.replace("T", " ");
+  const sendYear = parseInt(convertedDate.slice(0, 4));
+  const nowYear = new Date().getFullYear();
+  
+  if (sendYear === nowYear) {
+    return convertedDate.slice(5, 16);
+  }
+  return convertedDate.slice(2, 16);
+}

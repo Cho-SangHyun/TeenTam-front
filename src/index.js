@@ -10,7 +10,8 @@ const BASE_URL = process.env.REACT_APP_BASE_API_URL;
 
 const axiosApi = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true
+  withCredentials: true,
+  crossDomain: true
 });
 
 const authService = new AuthService(axiosApi);

@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { BiLike } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsChatDots } from "react-icons/bs";
+import { FiSend } from "react-icons/fi";
 import { getElapsedTime } from '../../services/times';
 import { TbDotsVertical } from "react-icons/tb";
 import { CRUD } from '../../app';
 import styles from './PostContent.module.css';
 import ProfileImage from '../ProfileImage/ProfileImage';
 
-const PostContent = ({post, setPost, category}) => {
+const PostContent = ({post, setPost, category, openModal, setReceiverId}) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const crudService = useContext(CRUD);
 
@@ -19,6 +20,12 @@ const PostContent = ({post, setPost, category}) => {
     const handleClickLike = () => {
         crudService.updatePostLike(user.id, post.boards_id, setPost);
     }
+
+    const openMessageModal = () => {
+        setReceiverId(post?.boards_writer);
+        openModal();
+    }
+
     // 더보기 클릭 시(점 세개짜리)
     const handleClickMore = () => {
         moreRef.current.classList.toggle(styles.show_more);
@@ -79,6 +86,11 @@ const PostContent = ({post, setPost, category}) => {
             </div>
             <div className={styles.empty_box}></div>
             <pre className={styles.post_content}>{post?.content}</pre>
+            {
+                (post?.boards_writer !== user?.id) && <button className={styles.send_note_button} onClick={openMessageModal} >
+                <FiSend className={styles.send_note_icon} /> &nbsp;쪽지
+            </button>
+            }
             <button className={styles.like_button} onClick={handleClickLike} >
                 <BiLike className={styles.like_icon} /> &nbsp;공감
             </button>

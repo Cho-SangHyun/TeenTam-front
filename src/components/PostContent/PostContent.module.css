@@ -185,9 +185,8 @@
     color: #666666;
 }
 
-.like_button{
+.like_button, .send_note_button{
     position: absolute;
-    right: 0;
 
     font-family: 'Pretendard';
     font-style: normal;
@@ -210,6 +209,14 @@
     transition: all .1s ease-out;
 }
 
-.like_button:hover{
+.like_button{
+    right: 0;
+}
+
+.send_note_button{
+    right: 85px;
+}
+
+.like_button:hover, .send_note_button:hover{
     transform: scale(1.01);
 }

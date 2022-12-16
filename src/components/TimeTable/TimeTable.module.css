@@ -1,0 +1,46 @@
+.time_table{
+    margin: 0 auto;
+    width: 840px;
+    height: 720px;
+
+    display: grid;
+    grid-template-columns: repeat(6, 140px);
+    grid-template-rows:  45px repeat(4, 90px) 45px repeat(3, 90px);
+
+    border: 1px solid #DBDBDB;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.day_of_the_week{
+	grid-column: 1 / 7;
+    display: grid;
+    grid-template-columns: repeat(6, 140px);
+    grid-template-rows: 45px;
+}
+
+.table_item{
+    border-right: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #111111;
+}
+
+.day_of_the_week .table_item{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.lunch_item{
+    grid-column: 1 / 7;
+    border-right: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
