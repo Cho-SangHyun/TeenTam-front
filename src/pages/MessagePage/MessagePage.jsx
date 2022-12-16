@@ -10,9 +10,9 @@ const MessagePage = (props) => {
     const authService = useContext(AUTH);
     const navigate = useNavigate();
     const [oppenentList, setOppenentList] = useState([
-        {name: "jofe"},
-        {name: "test111"},
-        {name: "dkuDKU"}
+        {name: "jofe", id:4},
+        {name: "test111", id:3},
+        {name: "dkuDKU", id:10}
     ])
     const [opponent, setOpponent] = useState("");
     const [messages, setMessages] = useState([]);
