@@ -26,11 +26,11 @@ const MessageList = ({ oppenentList, setOpponent, setOpponentId }) => {
             {
                 oppenentList.map((item, index) => {
                     return(
-                        <li key={index} className={styles.list_item} onClick={(e) => {handleClickOpponent(e, item.name, item.id)}}>
+                        <li key={index} className={styles.list_item} onClick={(e) => {handleClickOpponent(e, item.username, item.id)}}>
                             <div className={styles.opponent_profile}>
                                 <ProfileImage userId={item.id} />
                             </div>
-                            <span className={styles.opponent_name}>{item.name}</span>
+                            <span className={styles.opponent_name}>{item.username}</span>
                         </li>
                     ) 
                 })

@@ -262,9 +262,35 @@ class CRUDService {
             receiver,
             content
         }
-        this.axiosApi.post("/notes/", data)
+
+        const res = window.confirm("쪽지를 보내시겠습니까?");
+        if (res) {
+            this.axiosApi.post("/notes/", data)
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+    }
+
+    getOpponents(userId, setOpponents) {
+        this.axiosApi.get(`/notes/?user_id=${userId}`)
             .then(response => {
-                console.log(response);
+                setOpponents(response.data.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        
+    }
+
+    getMessages(userId, opponentId, setMessages) {
+        this.axiosApi.get(`/notes/content/?user_id=${userId}&notes_user_id=${opponentId}`)
+            .then(response => {
+                console.log(response.data.data);
+                setMessages(response.data.data);
             })
             .catch(error => {
                 console.log(error);

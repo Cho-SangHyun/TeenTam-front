@@ -5,7 +5,7 @@ import { IoMdRefresh } from "react-icons/io";
 import { BiTrashAlt } from "react-icons/bi";
 import styles from './MessageBoard.module.css';
 
-const MessageBoard = ({ opponent, messages, openModal }) => {
+const MessageBoard = ({ opponent, messages, openModal, user }) => {
     return(
         <section className={styles.message_board}>
             {
@@ -23,8 +23,7 @@ const MessageBoard = ({ opponent, messages, openModal }) => {
             <ul className={styles.message_list_board}>
                 {
                     messages.map((message, index) => {
-                        // isMine판별은 수정 필요
-                        return <Message key={index} content={message.content} isMine={message.name === "me"} />
+                        return <Message key={index} content={message.content} isMine={message.sender === user.id} />
                     })
                 }
             </ul>
