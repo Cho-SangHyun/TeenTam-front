@@ -1,8 +1,11 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useContext } from 'react';
 import { IoCloseOutline } from "react-icons/io5";
+import { CRUD } from '../../app';
 import styles from "./MessageModal.module.css";
 
 const MessageModal = ({ closeModal, receiver }) => {
+    const crudService = useContext(CRUD);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const modalRef = useRef();
 
@@ -30,8 +33,7 @@ const MessageModal = ({ closeModal, receiver }) => {
             alert("내용을 입력해주세요");
             return;
         }
-        console.log("보낸이 : ", user.id);
-        console.log("받는이 : ", receiver);
+        await crudService.sendMessage(receiver, user.id, content);
     };
 
     useEffect(() => {

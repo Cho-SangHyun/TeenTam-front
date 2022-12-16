@@ -255,6 +255,21 @@ class CRUDService {
                 console.log(error);
             })
     }
+
+    sendMessage(receiver, sender, content) {
+        const data = {
+            sender,
+            receiver,
+            content
+        }
+        this.axiosApi.post("/notes/", data)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 }
 
 export default CRUDService;
