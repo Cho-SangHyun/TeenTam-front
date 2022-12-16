@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AUTH } from '../../app';
 import MessageBoard from '../../components/MessageBoard/MessageBoard';
 import MessageList from '../../components/MessageList/MessageList';
+import MessageModal from '../../components/MessageModal/MessageModal';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from './MessagePage.module.css';
 
@@ -15,7 +16,16 @@ const MessagePage = (props) => {
         {name: "dkuDKU", id:10}
     ])
     const [opponent, setOpponent] = useState("");
+    const [opponentId, setOpponentId] = useState(null);
     const [messages, setMessages] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = useCallback(() => {
+        setShowModal(true);
+    }, []);
+    const closeModal = useCallback(() => {
+        setShowModal(false);
+    }, []);
 
     useEffect(() => {
         async function keepLogin(){
@@ -64,11 +74,12 @@ const MessagePage = (props) => {
     return(
         <section className={styles.message_page}>
             <Navbar />
+            {showModal && <MessageModal closeModal={closeModal} receiver={opponentId} />}
             <section className={styles.message_box}>
                 <h1 className={styles.message_box_title}>쪽지함</h1>
                 <section className={styles.message_container}>
-                    <MessageList oppenentList={oppenentList} setOpponent={setOpponent} />
-                    <MessageBoard opponent={opponent} messages={messages} />
+                    <MessageList oppenentList={oppenentList} setOpponent={setOpponent} setOpponentId={setOpponentId} />
+                    <MessageBoard opponent={opponent} messages={messages} openModal={() => {setTimeout(openModal, 50)}} />
                 </section>
             </section>
         </section>

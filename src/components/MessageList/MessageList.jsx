@@ -14,20 +14,19 @@ const addStyleToButton = (target) => {
 }
 
 
-const MessageList = ({ oppenentList, setOpponent }) => {
-    const handleClickOpponent = (e) => {
-        if(e.target.tagName === "LI"){
-            setOpponent(e.target.dataset.value);
-            addStyleToButton(e.target);
-        }
+const MessageList = ({ oppenentList, setOpponent, setOpponentId }) => {
+    const handleClickOpponent = (e, name, id) => {
+        setOpponent(name);
+        setOpponentId(id)
+        addStyleToButton(e.target);
     }
 
     return(
-        <ul className={styles.message_list} onClick={handleClickOpponent}>
+        <ul className={styles.message_list}>
             {
                 oppenentList.map((item, index) => {
                     return(
-                        <li key={index} className={styles.list_item} data-value={item.name}>
+                        <li key={index} className={styles.list_item} onClick={(e) => {handleClickOpponent(e, item.name, item.id)}}>
                             <div className={styles.opponent_profile}>
                                 <ProfileImage userId={item.id} />
                             </div>

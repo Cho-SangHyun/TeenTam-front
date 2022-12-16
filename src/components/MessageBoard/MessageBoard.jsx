@@ -5,7 +5,7 @@ import { IoMdRefresh } from "react-icons/io";
 import { BiTrashAlt } from "react-icons/bi";
 import styles from './MessageBoard.module.css';
 
-const MessageBoard = ({ opponent, messages }) => {
+const MessageBoard = ({ opponent, messages, openModal }) => {
     return(
         <section className={styles.message_board}>
             {
@@ -13,7 +13,7 @@ const MessageBoard = ({ opponent, messages }) => {
                     <div className={styles.board_header}>
                         <span className={styles.opponent_name}>{opponent}</span>
                         <span className={styles.icons}>
-                            <FiSend className={styles.send_icon} />
+                            <FiSend className={styles.send_icon} onClick={openModal} />
                             <IoMdRefresh className={styles.refresh_icon} />
                             <BiTrashAlt className={styles.remove_icon} />
                         </span>

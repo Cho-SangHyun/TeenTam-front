@@ -6,16 +6,17 @@ import { FiSend } from "react-icons/fi";
 import { CRUD } from '../../app';
 import styles from './Comment.module.css';
 
-const Comment = ({ comment, onDelete }) => {
+const Comment = ({ comment, onDelete, openModal, setReceiverId }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const crudService = useContext(CRUD);
 
-    const handleClickDelete = async () => {
-        await crudService.deleteComment(user.id, comment.id, onDelete);
+    const openMessageModal = () => {
+        setReceiverId(comment.comments_writer);
+        openModal();
     }
 
-    const handleClickSend = () => {
-        alert("쪽지를 보냅니다!");
+    const handleClickDelete = async () => {
+        await crudService.deleteComment(user.id, comment.id, onDelete);
     }
 
     return(
@@ -29,7 +30,7 @@ const Comment = ({ comment, onDelete }) => {
                             { user.id !== comment.comments_writer && (
                                 <FiSend 
                                     className={styles.send_note_icon} 
-                                    onClick={handleClickSend}
+                                    onClick={openMessageModal}
                                 />)
                             }
                             { user.id === comment.comments_writer && (

@@ -10,7 +10,7 @@ import { CRUD } from '../../app';
 import styles from './PostContent.module.css';
 import ProfileImage from '../ProfileImage/ProfileImage';
 
-const PostContent = ({post, setPost, category}) => {
+const PostContent = ({post, setPost, category, openModal, setReceiverId}) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const crudService = useContext(CRUD);
 
@@ -20,10 +20,12 @@ const PostContent = ({post, setPost, category}) => {
     const handleClickLike = () => {
         crudService.updatePostLike(user.id, post.boards_id, setPost);
     }
-    // 쪽지
-    const handleClickSendNote = () => {
-        alert("쪽지를 보냅니다!");
+
+    const openMessageModal = () => {
+        setReceiverId(post?.boards_writer);
+        openModal();
     }
+
     // 더보기 클릭 시(점 세개짜리)
     const handleClickMore = () => {
         moreRef.current.classList.toggle(styles.show_more);
@@ -85,7 +87,7 @@ const PostContent = ({post, setPost, category}) => {
             <div className={styles.empty_box}></div>
             <pre className={styles.post_content}>{post?.content}</pre>
             {
-                (post?.boards_writer !== user?.id) && <button className={styles.send_note_button} onClick={handleClickSendNote} >
+                (post?.boards_writer !== user?.id) && <button className={styles.send_note_button} onClick={openMessageModal} >
                 <FiSend className={styles.send_note_icon} /> &nbsp;쪽지
             </button>
             }
