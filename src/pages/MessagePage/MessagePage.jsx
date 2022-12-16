@@ -48,7 +48,7 @@ const MessagePage = (props) => {
     }, [crudService, user]);
 
     useEffect(() => {
-        crudService.getMessages(user.id, opponentId, setMessages)
+        crudService.getMessages(user.id, opponentId, setMessages);
     }, [opponentId, user, crudService])
     
     return(
@@ -63,7 +63,8 @@ const MessagePage = (props) => {
                         opponent={opponent}
                         messages={messages} 
                         openModal={() => {setTimeout(openModal, 50)}} 
-                        user={user} 
+                        user={user}
+                        refreshMessages={() => {crudService.getMessages(user.id, opponentId, setMessages);}} 
                     />
                 </section>
             </section>

@@ -289,7 +289,6 @@ class CRUDService {
     getMessages(userId, opponentId, setMessages) {
         this.axiosApi.get(`/notes/content/?user_id=${userId}&notes_user_id=${opponentId}`)
             .then(response => {
-                console.log(response.data.data);
                 setMessages(response.data.data);
             })
             .catch(error => {

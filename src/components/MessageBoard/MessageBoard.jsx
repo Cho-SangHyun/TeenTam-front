@@ -5,7 +5,7 @@ import { IoMdRefresh } from "react-icons/io";
 import { BiTrashAlt } from "react-icons/bi";
 import styles from './MessageBoard.module.css';
 
-const MessageBoard = ({ opponent, messages, openModal, user }) => {
+const MessageBoard = ({ opponent, messages, openModal, user, refreshMessages }) => {
     return(
         <section className={styles.message_board}>
             {
@@ -14,7 +14,7 @@ const MessageBoard = ({ opponent, messages, openModal, user }) => {
                         <span className={styles.opponent_name}>{opponent}</span>
                         <span className={styles.icons}>
                             <FiSend className={styles.send_icon} onClick={openModal} />
-                            <IoMdRefresh className={styles.refresh_icon} />
+                            <IoMdRefresh className={styles.refresh_icon} onClick={refreshMessages} />
                             <BiTrashAlt className={styles.remove_icon} />
                         </span>
                     </div>
@@ -23,7 +23,12 @@ const MessageBoard = ({ opponent, messages, openModal, user }) => {
             <ul className={styles.message_list_board}>
                 {
                     messages.map((message, index) => {
-                        return <Message key={index} content={message.content} isMine={message.sender === user.id} />
+                        return <Message 
+                            key={index} 
+                            content={message.content} 
+                            isMine={message.sender === user.id} 
+                            sendDate={message.send_date}
+                        />
                     })
                 }
             </ul>
