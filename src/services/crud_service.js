@@ -256,7 +256,7 @@ class CRUDService {
             })
     }
 
-    sendMessage(receiver, sender, content) {
+    sendMessage(receiver, sender, content, closeModal, refreshMessages) {
         const data = {
             sender,
             receiver,
@@ -267,7 +267,8 @@ class CRUDService {
         if (res) {
             this.axiosApi.post("/notes/", data)
                 .then(response => {
-                    console.log(response);
+                    closeModal();
+                    refreshMessages && refreshMessages();
                 })
                 .catch(error => {
                     console.log(error);

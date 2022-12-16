@@ -4,7 +4,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { CRUD } from '../../app';
 import styles from "./MessageModal.module.css";
 
-const MessageModal = ({ closeModal, receiver }) => {
+const MessageModal = ({ closeModal, receiver, refreshMessages }) => {
     const crudService = useContext(CRUD);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const modalRef = useRef();
@@ -33,7 +33,7 @@ const MessageModal = ({ closeModal, receiver }) => {
             alert("내용을 입력해주세요");
             return;
         }
-        await crudService.sendMessage(receiver, user.id, content);
+        await crudService.sendMessage(receiver, user.id, content, closeModal, refreshMessages);
     };
 
     useEffect(() => {

@@ -26,6 +26,9 @@ const MessagePage = (props) => {
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
+    const refreshMessages = () => {
+        crudService.getMessages(user.id, opponentId, setMessages);
+    }
     useEffect(() => {
         async function keepLogin(){
             const userData = localStorage.getItem("user");
@@ -54,7 +57,7 @@ const MessagePage = (props) => {
     return(
         <section className={styles.message_page}>
             <Navbar />
-            {showModal && <MessageModal closeModal={closeModal} receiver={opponentId} />}
+            {showModal && <MessageModal closeModal={closeModal} receiver={opponentId} refreshMessages={refreshMessages} />}
             <section className={styles.message_box}>
                 <h1 className={styles.message_box_title}>쪽지함</h1>
                 <section className={styles.message_container}>
@@ -64,7 +67,7 @@ const MessagePage = (props) => {
                         messages={messages} 
                         openModal={() => {setTimeout(openModal, 50)}} 
                         user={user}
-                        refreshMessages={() => {crudService.getMessages(user.id, opponentId, setMessages);}} 
+                        refreshMessages={refreshMessages} 
                     />
                 </section>
             </section>
