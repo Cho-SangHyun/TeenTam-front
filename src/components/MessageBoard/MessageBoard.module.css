@@ -35,7 +35,7 @@
 .icons{
     position: absolute;
     top: 14px;
-    right: 30px;
+    right: 25px;
 
     display: flex;
     align-items: center;
@@ -50,12 +50,6 @@
 
 .refresh_icon{
     font-size: 24px;
-    margin-right: 30px;
-    cursor: pointer;
-}
-
-.remove_icon{
-    font-size: 21px;
     cursor: pointer;
 }
 

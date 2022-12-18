@@ -2,7 +2,6 @@ import React from 'react';
 import Message from '../Message/Message';
 import { FiSend } from "react-icons/fi";
 import { IoMdRefresh } from "react-icons/io";
-import { BiTrashAlt } from "react-icons/bi";
 import styles from './MessageBoard.module.css';
 
 const MessageBoard = ({ opponent, messages, openModal, user, refreshMessages }) => {
@@ -15,7 +14,6 @@ const MessageBoard = ({ opponent, messages, openModal, user, refreshMessages }) 
                         <span className={styles.icons}>
                             <FiSend className={styles.send_icon} onClick={openModal} />
                             <IoMdRefresh className={styles.refresh_icon} onClick={refreshMessages} />
-                            <BiTrashAlt className={styles.remove_icon} />
                         </span>
                     </div>
                 )
