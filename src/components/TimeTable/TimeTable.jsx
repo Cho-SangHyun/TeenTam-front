@@ -1,7 +1,70 @@
 import React from 'react';
+import TableItem from '../TableItem/TableItem';
 import styles from './TimeTable.module.css';
 
-const TimeTable = (props) => {
+const tablesBeforeLunch = (tableItems, setTableItems) => {
+    const res = [];
+    let period = 0;
+    for (let i = 0; i < 24; i++) {
+        if (i % 6 === 0) {
+            period += 1;
+            res.push(<div key={i} className={styles.table_item}>{period}</div>);
+            continue;
+        }
+        const dayOfWeek = i % 6;
+        let match = false;
+        for (const item of tableItems) {
+            if (item.row === period && item.col === dayOfWeek) {
+                res.push(<TableItem 
+                    key={i} 
+                    period={period} 
+                    dayOfWeek={dayOfWeek} 
+                    subject={item.subject} 
+                    setTableItems={setTableItems}
+                />);
+                match = true;
+                break;
+            }
+        }
+        if (!match) {
+            res.push(<div key={i} className={styles.table_item} data-row={period} dara-col={dayOfWeek}></div>)
+        }
+    }
+    return res;
+}
+
+const tablesAfterLunch = (tableItems, setTableItems) => {
+    const res = [];
+    let period = 4;
+    for (let i = 24; i < 42; i++) {
+        if (i % 6 === 0) {
+            period += 1;
+            res.push(<div key={i} className={styles.table_item}>{period}</div>);
+            continue;
+        }
+        const dayOfWeek = i % 6;
+        let match = false;
+        for (const item of tableItems) {
+            if (item.row === period && item.col === dayOfWeek) {
+                res.push(<TableItem 
+                    key={i} 
+                    period={period} 
+                    dayOfWeek={dayOfWeek} 
+                    subject={item.subject} 
+                    setTableItems={setTableItems}
+                />);
+                match = true;
+                break;
+            }
+        }
+        if (!match) {
+            res.push(<div key={i} className={styles.table_item} data-row={period} dara-col={dayOfWeek}></div>)
+        }
+    }
+    return res;
+}
+
+const TimeTable = ({tableItems, setTableItems}) => {
     return(
         <section className={styles.time_table}>
             <div className={styles.day_of_the_week}>
@@ -12,49 +75,13 @@ const TimeTable = (props) => {
                 <div className={styles.table_item}>목</div>
                 <div className={styles.table_item}>금</div>
             </div>
-            <div className={styles.table_item}>1</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}>2</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}>3</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}>4</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
+            {
+                tablesBeforeLunch(tableItems, setTableItems)
+            }
             <div className={styles.lunch_item}>🍱🍣🍝🍌🥛</div>
-            <div className={styles.table_item}>5</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}>6</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}>7</div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
-            <div className={styles.table_item}></div>
+            {
+                tablesAfterLunch(tableItems, setTableItems)
+            }
         </section>
     )
 }

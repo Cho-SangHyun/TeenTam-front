@@ -296,6 +296,31 @@ class CRUDService {
                 console.log(error);
             })
     }
+
+    getTimeTableItems(userId, setTableItems) {
+        const timeTableItems = JSON.parse(localStorage.getItem("timeTable"));
+        setTableItems(timeTableItems);
+    }
+
+    createTimeTableItem(userId, period, dayOfWeek, subject, setTableItems) {
+        const timeTableItems = JSON.parse(localStorage.getItem("timeTable"));
+        timeTableItems.push({
+            row: parseInt(period),
+            col: parseInt(dayOfWeek),
+            subject
+        });
+        setTableItems(timeTableItems);
+        localStorage.setItem("timeTable", JSON.stringify(timeTableItems));
+    }
+
+    removeTimeTableItem(userId, period, dayOfWeek, subject, setTableItems) {
+        if (window.confirm("삭제하시겠습니까?")) {
+            const timeTableItems = JSON.parse(localStorage.getItem("timeTable"));
+            const newTimeTableItems = timeTableItems.filter(item => !(item.row===period && item.col===dayOfWeek && item.subject===subject));
+            setTableItems(newTimeTableItems);
+            localStorage.setItem("timeTable", JSON.stringify(newTimeTableItems));
+        };
+    }
 }
 
 export default CRUDService;
