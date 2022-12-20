@@ -52,7 +52,7 @@ const TimeTableModal = ({ closeModal, setTableItems }) => {
             printErrorMessage("subject", "과목명을 입력해주세요");
             return;
         }
-        crudService.createTimeTableItem(4, period, dayOfWeek, subject, setTableItems);
+        crudService.createTimeTableItem(4, period, dayOfWeek, subject, setTableItems, closeModal);
     };
 
     // 인풋태그 클릭하면 해당 인풋과 관련된 오류메시지를 지움

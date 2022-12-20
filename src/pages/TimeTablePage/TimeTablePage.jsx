@@ -24,26 +24,25 @@ const TimeTablePage = (props) => {
     const [tableItems, setTableItems] = useState([]);
         
     useEffect(() => {
-        // crudService(user.id, setTableItems);
-        crudService.getTimeTableItems(4, setTableItems);
+        crudService.getTimeTableItems(user.id, setTableItems);
     }, [user, crudService])
 
-    // useEffect(() => {
-    //     async function keepLogin(){
-    //         const userData = localStorage.getItem("user");
-    //         if (!userData) {
-    //             alert("로그인이 필요한 페이지입니다");
-    //             navigate("/login");
-    //         } else if(userData) {
-    //             const res = await authService.refreshAccessToken();
-    //             if(!res){
-    //                 alert("로그인이 만료됐습니다. 다시 로그인해주세요");
-    //                 navigate("/login");
-    //             }
-    //         }
-    //     }
-    //     keepLogin();
-    // }, [authService, navigate]);
+    useEffect(() => {
+        async function keepLogin(){
+            const userData = localStorage.getItem("user");
+            if (!userData) {
+                alert("로그인이 필요한 페이지입니다");
+                navigate("/login");
+            } else if(userData) {
+                const res = await authService.refreshAccessToken();
+                if(!res){
+                    alert("로그인이 만료됐습니다. 다시 로그인해주세요");
+                    navigate("/login");
+                }
+            }
+        }
+        keepLogin();
+    }, [authService, navigate]);
     
     return(
         <section className={styles.time_table_page}>

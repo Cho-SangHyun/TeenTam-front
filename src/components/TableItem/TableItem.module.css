@@ -8,6 +8,8 @@
 
     color: #fffefe;
     position: relative;
+
+    cursor: grab;
 }
 
 .red{
@@ -36,6 +38,27 @@
 
 .yellow{
     background-color: #e8d35b;
+}
+
+.pink{
+    background-color: #df7ace;
+}
+
+.black{
+    background-color: #313131;
+}
+
+.gray{
+    background-color: #7c7c7c;
+}
+
+.modify_botton{
+    position: absolute;
+    font-size: 16px;
+    top: 2px;
+    right: 16px;
+    color: #fffefe;
+    cursor: pointer;
 }
 
 .remove_button{

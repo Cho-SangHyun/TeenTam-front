@@ -10,26 +10,42 @@ const COLOR_TABLE = {
     4: styles.blue,
     5: styles.purple,
     6: styles.light_green,
-    7 : styles.yellow
+    7: styles.yellow,
+    8: styles.pink,
+    9: styles.black,
+    10: styles.gray
 }
 
 const hashSubjectToColor = (subject) => {
     let hash = 17;
     for (let i = 0; i < subject.length; i++) {
-        hash = (13 * hash * subject.charCodeAt(i)) % 7 + 1;
+        hash = (13 * hash * subject.charCodeAt(i)) % 9 + 1;
     }
     return COLOR_TABLE[hash];
 }
 
-const TableItem = ({ period, dayOfWeek, subject, setTableItems }) => {
+const TableItem = ({ period, day, subject, setTableItems }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const crudService = useContext(CRUD);
+
     const remove = () => {
-        crudService.removeTimeTableItem(4, period, dayOfWeek, subject, setTableItems);
+        crudService.removeTimeTableItem(user.id, period, day, subject, setTableItems);
+    }
+
+    const saveDataToTransfer = e => {
+        e.dataTransfer.setData('oldPeriod', period); 
+        e.dataTransfer.setData('oldDay', day); 
+        e.dataTransfer.setData('subject', subject); 
     }
 
     return(
-        <div className={`${styles.table_item} ${hashSubjectToColor(subject)}`} data-row={period} data-col={dayOfWeek} >
+        <div 
+            className={`${styles.table_item} ${hashSubjectToColor(subject)}`}
+            draggable={true}
+            data-row={period} 
+            data-col={day}
+            onDragStart={saveDataToTransfer}
+        >
             <BiTrashAlt className={styles.remove_button} onClick={remove} />
             {subject}
         </div>

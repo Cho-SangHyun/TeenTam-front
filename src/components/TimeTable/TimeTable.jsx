@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { CRUD } from '../../app';
 import TableItem from '../TableItem/TableItem';
 import styles from './TimeTable.module.css';
 
-const tablesBeforeLunch = (tableItems, setTableItems) => {
+const tablesBeforeLunch = (tableItems, setTableItems, modifyItem) => {
     const res = [];
     let period = 0;
     for (let i = 0; i < 24; i++) {
@@ -11,14 +12,14 @@ const tablesBeforeLunch = (tableItems, setTableItems) => {
             res.push(<div key={i} className={styles.table_item}>{period}</div>);
             continue;
         }
-        const dayOfWeek = i % 6;
+        const day = i % 6;
         let match = false;
         for (const item of tableItems) {
-            if (item.row === period && item.col === dayOfWeek) {
+            if (item.period === period && item.day === day && item.subject) {
                 res.push(<TableItem 
                     key={i} 
                     period={period} 
-                    dayOfWeek={dayOfWeek} 
+                    day={day} 
                     subject={item.subject} 
                     setTableItems={setTableItems}
                 />);
@@ -27,13 +28,19 @@ const tablesBeforeLunch = (tableItems, setTableItems) => {
             }
         }
         if (!match) {
-            res.push(<div key={i} className={styles.table_item} data-row={period} dara-col={dayOfWeek}></div>)
+            res.push(<div 
+                key={i} 
+                className={styles.table_item}
+                data-period={period} 
+                data-day={day}
+                onDragOver={(e) => {e.preventDefault();}}
+                onDrop={modifyItem} ></div>)
         }
     }
     return res;
 }
 
-const tablesAfterLunch = (tableItems, setTableItems) => {
+const tablesAfterLunch = (tableItems, setTableItems, modifyItem) => {
     const res = [];
     let period = 4;
     for (let i = 24; i < 42; i++) {
@@ -42,14 +49,14 @@ const tablesAfterLunch = (tableItems, setTableItems) => {
             res.push(<div key={i} className={styles.table_item}>{period}</div>);
             continue;
         }
-        const dayOfWeek = i % 6;
+        const day = i % 6;
         let match = false;
         for (const item of tableItems) {
-            if (item.row === period && item.col === dayOfWeek) {
+            if (item.period === period && item.day === day && item.subject) {
                 res.push(<TableItem 
                     key={i} 
                     period={period} 
-                    dayOfWeek={dayOfWeek} 
+                    day={day} 
                     subject={item.subject} 
                     setTableItems={setTableItems}
                 />);
@@ -58,13 +65,32 @@ const tablesAfterLunch = (tableItems, setTableItems) => {
             }
         }
         if (!match) {
-            res.push(<div key={i} className={styles.table_item} data-row={period} dara-col={dayOfWeek}></div>)
+            res.push(<div 
+                key={i} 
+                className={styles.table_item}
+                data-period={period} 
+                data-day={day}
+                onDragOver={(e) => {e.preventDefault();}}
+                onDrop={modifyItem} ></div>)
         }
     }
     return res;
 }
 
 const TimeTable = ({tableItems, setTableItems}) => {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    const crudService = useContext(CRUD);
+
+    const modifyItem = (e) => {
+        const subject = e.dataTransfer.getData("subject");
+        const oldPeriod = e.dataTransfer.getData("oldPeriod");
+        const oldDay = e.dataTransfer.getData("oldDay");
+        const newPeriod = e.target.dataset.period;
+        const newDay = e.target.dataset.day;
+
+        crudService.modifyTimeTableItem(user.id, subject, oldPeriod, oldDay, newPeriod, newDay, setTableItems);
+    }
+
     return(
         <section className={styles.time_table}>
             <div className={styles.day_of_the_week}>
@@ -76,11 +102,11 @@ const TimeTable = ({tableItems, setTableItems}) => {
                 <div className={styles.table_item}>금</div>
             </div>
             {
-                tablesBeforeLunch(tableItems, setTableItems)
+                tablesBeforeLunch(tableItems, setTableItems, modifyItem)
             }
             <div className={styles.lunch_item}>🍱🍣🍝🍌🥛</div>
             {
-                tablesAfterLunch(tableItems, setTableItems)
+                tablesAfterLunch(tableItems, setTableItems, modifyItem)
             }
         </section>
     )

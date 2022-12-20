@@ -298,28 +298,109 @@ class CRUDService {
     }
 
     getTimeTableItems(userId, setTableItems) {
-        const timeTableItems = JSON.parse(localStorage.getItem("timeTable"));
-        setTableItems(timeTableItems);
+        this.axiosApi.get(`/timetable/?user_id=${userId}`)
+            .then(response => {
+                setTableItems(response.data.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
-    createTimeTableItem(userId, period, dayOfWeek, subject, setTableItems) {
-        const timeTableItems = JSON.parse(localStorage.getItem("timeTable"));
-        timeTableItems.push({
-            row: parseInt(period),
-            col: parseInt(dayOfWeek),
-            subject
-        });
-        setTableItems(timeTableItems);
-        localStorage.setItem("timeTable", JSON.stringify(timeTableItems));
+    createTimeTableItem(userId, period, day, subject, setTableItems, closeModal) {
+        const data = {
+            user_id: userId,
+            timetable: [
+                {
+                    timetable_user: userId,
+                    period,
+                    day,
+                    subject
+                }
+            ]
+        }
+        this.axiosApi.post(`/timetable/`, data)
+            .then(response => {
+                setTableItems(tableItems => {
+                    return [
+                        ...tableItems,
+                        {
+                            timetable_user: parseInt(userId),
+                            period: parseInt(period),
+                            day: parseInt(day),
+                            subject
+                        }
+                    ]
+                });
+                closeModal();
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
-    removeTimeTableItem(userId, period, dayOfWeek, subject, setTableItems) {
+    removeTimeTableItem(userId, period, day, subject, setTableItems) {
         if (window.confirm("삭제하시겠습니까?")) {
-            const timeTableItems = JSON.parse(localStorage.getItem("timeTable"));
-            const newTimeTableItems = timeTableItems.filter(item => !(item.row===period && item.col===dayOfWeek && item.subject===subject));
-            setTableItems(newTimeTableItems);
-            localStorage.setItem("timeTable", JSON.stringify(newTimeTableItems));
+            const data = {
+                user_id: userId,
+                timetable: [
+                    {
+                        timetable_user: userId,
+                        period,
+                        day,
+                        subject
+                    }
+                ]
+            }
+            this.axiosApi.delete(`/timetable/`, {data})
+                .then(response => {
+                    setTableItems(tableItems => {
+                        return tableItems.filter(item => !(parseInt(period) === item.period && parseInt(day) === day && subject === item.subject));
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         };
+    }
+
+    modifyTimeTableItem(userId, subject, oldPeriod, oldDay, newPeriod, newDay, setTableItems) {
+        const data = {
+            user_id: userId,
+            timetable: [
+                {
+                    timetable_user: userId,
+                    period: oldPeriod,
+                    day: oldDay,
+                    subject: null
+                },
+                {
+                    timetable_user: userId,
+                    period: newPeriod,
+                    day: newDay,
+                    subject
+                }
+            ]
+        }
+        this.axiosApi.post(`/timetable/`, data)
+            .then(response => {
+                setTableItems(tableItems => {
+                    const newTimeTableItems = tableItems.filter(item => !(parseInt(oldPeriod) === item.period && parseInt(oldDay) === item.day && subject === item.subject));
+                    console.log(oldPeriod, oldDay, newTimeTableItems);
+                    return [
+                        ...newTimeTableItems,
+                        {
+                            timetable_user: parseInt(userId),
+                            period: parseInt(newPeriod),
+                            day: parseInt(newDay),
+                            subject
+                        }
+                    ]
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 }
 
