@@ -386,7 +386,6 @@ class CRUDService {
             .then(response => {
                 setTableItems(tableItems => {
                     const newTimeTableItems = tableItems.filter(item => !(parseInt(oldPeriod) === item.period && parseInt(oldDay) === item.day && subject === item.subject));
-                    console.log(oldPeriod, oldDay, newTimeTableItems);
                     return [
                         ...newTimeTableItems,
                         {
