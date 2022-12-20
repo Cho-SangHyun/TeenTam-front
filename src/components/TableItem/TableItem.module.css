@@ -1,0 +1,71 @@
+.table_item{
+    border-right: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fffefe;
+    position: relative;
+
+    cursor: grab;
+}
+
+.red{
+    background-color: #f15757;
+}
+
+.green{
+    background-color: #32a95e;
+}
+
+.orange{
+    background-color: #f19757;
+}
+
+.blue{
+    background-color: #5797f1;
+}
+
+.purple{
+    background-color: #9257f1;
+}
+
+.light_green{
+    background-color: #b1dd73;
+}
+
+.yellow{
+    background-color: #e8d35b;
+}
+
+.pink{
+    background-color: #df7ace;
+}
+
+.black{
+    background-color: #313131;
+}
+
+.gray{
+    background-color: #7c7c7c;
+}
+
+.modify_botton{
+    position: absolute;
+    font-size: 16px;
+    top: 2px;
+    right: 16px;
+    color: #fffefe;
+    cursor: pointer;
+}
+
+.remove_button{
+    position: absolute;
+    font-size: 14px;
+    top: 2px;
+    right: 2px;
+    color: #fffefe;
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSchoolLunch } from '../../services/school_lunch';
+import { BiErrorCircle } from "react-icons/bi";
 import styles from './SchoolLunchCard.module.css';
 
 const FoodList = ({menu, foodList}) => {
@@ -19,7 +20,7 @@ const FoodList = ({menu, foodList}) => {
     )
 }
 
-const SchoolLunchCard = ({schoolName}) => {
+const SchoolLunchCard = ({schoolName, user}) => {
     const [menu, setMenu] = useState("lunch");
     const [foodList, setFoodList] = useState({});
 
@@ -43,7 +44,13 @@ const SchoolLunchCard = ({schoolName}) => {
 
     return(
         <div className={styles.school_lunch_card}>
-            <h2 className={styles.school_lunch_title}>오늘 우리학교 급식</h2>
+            {
+                user === null ? <div className={styles.backdrop}>
+                    <BiErrorCircle className={styles.warning} />
+                    <span className={styles.login_message}>로그인 후 이용 가능합니다.</span>
+                </div> : null
+            }
+            <h2 className={styles.school_lunch_title}>🍱 오늘 우리학교 급식</h2>
             <ul className={styles.menu_select_list} onClick={handleClickMenu}>
                 <li className={`${styles.menu} ${styles.selected_menu}`} data-value="lunch">점심</li>
                 <li className={styles.menu} data-value="dinner">저녁</li>
