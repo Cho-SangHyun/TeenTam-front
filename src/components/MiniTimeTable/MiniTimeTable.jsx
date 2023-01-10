@@ -37,7 +37,9 @@ const MiniTimeTable = ({user}) => {
     const [today, setToday] = useState(new Date());
 
     useEffect(() => {
-        crudService.getTimeTableItems(user.id, setTableItems);
+        if (user) {
+            crudService.getTimeTableItems(user?.id, setTableItems);
+        }
     }, [user, crudService])
 
     return(

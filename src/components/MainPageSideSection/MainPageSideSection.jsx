@@ -12,8 +12,8 @@ const MainPageSideSection = (props) => {
     return(
         <section className={styles.main_page_side_section}>
             <section className={styles.side_menus}>
-                <MainPageProfile  user={user} />
-                <SchoolLunchCard schoolName={"수지고등학교"} user={user} />
+                <MainPageProfile user={user} />
+                <SchoolLunchCard user={user} />
                 <MiniTimeTable user={user} />
             </section>
         </section>

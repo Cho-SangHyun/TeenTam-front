@@ -22,10 +22,6 @@ const TimeTablePage = (props) => {
     }, []);
 
     const [tableItems, setTableItems] = useState([]);
-        
-    useEffect(() => {
-        crudService.getTimeTableItems(user.id, setTableItems);
-    }, [user, crudService])
 
     useEffect(() => {
         async function keepLogin(){
@@ -39,10 +35,11 @@ const TimeTablePage = (props) => {
                     alert("로그인이 만료됐습니다. 다시 로그인해주세요");
                     navigate("/login");
                 }
+                crudService.getTimeTableItems(user.id, setTableItems);
             }
         }
         keepLogin();
-    }, [authService, navigate]);
+    }, [authService, navigate, user, crudService]);
     
     return(
         <section className={styles.time_table_page}>

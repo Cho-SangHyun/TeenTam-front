@@ -27,7 +27,17 @@ const ProfileSettingForm = (props) => {
     const profileImageRef = useRef();
 
     useEffect(() => {
-        crudService.getMyInfo(user.id, setMyInfo, setUsername, setSchool, setGrade);
+        // crudService.getMyInfo(user.id, setMyInfo, setUsername, setSchool, setGrade);
+        // 훼이크
+        setUsername(user.username);
+        setSchool(user.school ? user.school : "");
+        setGrade(user.grade ? user.grade : "");
+        setMyInfo({
+            username: user.username,
+            school: user.school,
+            grade: user.grade,
+            email: user.email
+        })
     }, [user, crudService, setMyInfo, setUsername, setSchool, setGrade])
 
     const errorRef = {
@@ -139,7 +149,12 @@ const ProfileSettingForm = (props) => {
 
     const settingUsername = () => {
         if (username !== myInfo.username) {
-            console.log("닉네임 변경 완료");
+            const myOldInfo = JSON.parse(localStorage.getItem("user"));
+            const myNewInfo = {
+                ...myOldInfo,
+                username: username
+            }
+            localStorage.setItem("user", JSON.stringify(myNewInfo));
         }
     }
 
@@ -150,11 +165,22 @@ const ProfileSettingForm = (props) => {
         if (school === myInfo.school) {
             return;
         }
-        console.log("학교명 변경 완료");
+        
+        const myOldInfo = JSON.parse(localStorage.getItem("user"));
+        const myNewInfo = {
+            ...myOldInfo,
+            school: school
+        }
+        localStorage.setItem("user", JSON.stringify(myNewInfo));
     }
 
     const settingGrade = () => {
-        console.log("학년 정보 변경 완료");
+        const myOldInfo = JSON.parse(localStorage.getItem("user"));
+        const myNewInfo = {
+            ...myOldInfo,
+            grade: grade
+        }
+        localStorage.setItem("user", JSON.stringify(myNewInfo));
     }
 
     return(

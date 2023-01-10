@@ -21,13 +21,17 @@ const MainPageProfile = ({ user }) => {
                         </div>
                         <div className={styles.user_info}>
                             <div className={styles.school_info}>
-                                <p className={styles.school_name_info}><b>학교 정보</b><span className={styles.school_name}>정보 없음</span></p>
-                                <p className={styles.grade_info}><b>학년</b><span className={styles.grade}>정보 없음</span></p>
+                                <p className={styles.school_name_info}><b>학교 정보</b><span className={styles.school_name}>
+                                    {user.school ? user.school : "정보 없음"}
+                                </span></p>
+                                <p className={styles.grade_info}><b>학년</b><span className={styles.grade}>
+                                    {user.grade ? user.grade : "정보 없음"}    
+                                </span></p>
                             </div>
                             <div className={styles.activity_info}>
                                 <div className={styles.level_info}>내 레벨<span className={styles.value}>LV.1</span></div>
-                                <div className={styles.post_info}>작성한 글<span className={styles.value}>-</span></div>
-                                <div className={styles.comment_info}>작성한 댓글<span className={styles.value}>-</span></div>
+                                <div className={styles.post_info}>작성한 글<span className={styles.value}>{user.boards_written}</span></div>
+                                <div className={styles.comment_info}>작성한 댓글<span className={styles.value}>{user.comments_written}</span></div>
                             </div>
                         </div>
                         <Link to='/mypage' className={`${styles.button} ${styles.profile_edit_button}`}>프로필 수정하기</Link>

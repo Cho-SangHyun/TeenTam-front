@@ -5,7 +5,7 @@ class AuthService {
         this.axiosApi = axiosApi;
     }
 
-    login({ email, password }, onLogin, printErrorMessage) {
+    async login({ email, password }, onLogin, printErrorMessage) {
         const data = {
             email,
             password,
@@ -25,10 +25,28 @@ class AuthService {
                     ...userData,
                     profile_image: profileImageURL
                 }
+                // 훼이크
+                this.axiosApi.get(`/mypage/${userData.id}/`)
+                    .then(response => {
+                        const myInfo = response.data.data;
+                        const { boards_written, comments_written } = myInfo;
+                        userData = {
+                            ...userData,
+                            boards_written,
+                            comments_written,
+                            school: null,
+                            grade: null
+                        }
+                        localStorage.setItem("user", JSON.stringify(userData));
+                        onLogin();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
 
                 // localStorage에도 유저 정보 추가
-                localStorage.setItem("user", JSON.stringify(userData));
-                onLogin();
+                // localStorage.setItem("user", JSON.stringify(userData));
+                // onLogin();
             })
             .catch(error => {
                 if(error.response.data.non_field_errors[0] === "wrong password"){
