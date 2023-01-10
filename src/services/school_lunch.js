@@ -1,6 +1,6 @@
 // 학교정보 가져오기
 export const getSchoolInfo = async (schoolName) => {
-    const _schoolName = schoolName || "풍덕고등학교";
+    const _schoolName = schoolName;
     const url = `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.REACT_APP_SCHOOL_API_KEY}&Type=json&pIndex=1&pSize=100&SCHUL_NM=${_schoolName}`;
     const res = await fetch(url);
     const resJson = await res.json();
@@ -10,10 +10,11 @@ export const getSchoolInfo = async (schoolName) => {
 }
 
 // 점심, 저녁 정보 가져오기. 나중에 하드코딩된 부분 고쳐야 함(교육청코드, 학교코드 받아서 하는 걸로)
-export const getSchoolLunch = async () => {
+export const getSchoolLunch = async (schoolName) => {
     const data = {};
     const todayString = getTodayString();
-    const { ATPT_OFCDC_SC_CODE, SD_SCHUL_CODE } = await getSchoolInfo();
+    
+    const { ATPT_OFCDC_SC_CODE, SD_SCHUL_CODE } = await getSchoolInfo(schoolName);
     
     const lunchUrl = `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=${process.env.REACT_APP_SCHOOL_API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}&SD_SCHUL_CODE=${SD_SCHUL_CODE}&MMEAL_SC_CODE=2&MLSV_YMD=${todayString}`;
     const dinnerUrl = `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=${process.env.REACT_APP_SCHOOL_API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}&SD_SCHUL_CODE=${SD_SCHUL_CODE}&MMEAL_SC_CODE=3&MLSV_YMD=${todayString}`;

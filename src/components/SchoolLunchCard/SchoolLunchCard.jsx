@@ -20,7 +20,7 @@ const FoodList = ({menu, foodList}) => {
     )
 }
 
-const SchoolLunchCard = ({schoolName, user}) => {
+const SchoolLunchCard = ({user}) => {
     const [menu, setMenu] = useState("lunch");
     const [foodList, setFoodList] = useState({});
 
@@ -36,11 +36,13 @@ const SchoolLunchCard = ({schoolName, user}) => {
 
     useEffect(() => {
         async function getSchoolFoodList(){
-            const fList = await getSchoolLunch();
-            setFoodList(fList);
+            if (user.school) {
+                const fList = await getSchoolLunch(user.school);
+                setFoodList(fList);
+            }
         }
         getSchoolFoodList();
-    }, [setFoodList]);
+    }, [setFoodList, user]);
 
     return(
         <div className={styles.school_lunch_card}>

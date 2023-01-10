@@ -41,17 +41,16 @@ const MessagePage = (props) => {
                     alert("로그인이 만료됐습니다. 다시 로그인해주세요");
                     navigate("/login");
                 }
+                crudService.getOpponents(user.id, setOppenentList);
             }
         }
         keepLogin();
-    }, [authService, navigate]);
+    }, [authService, navigate, user, crudService]);
 
     useEffect(() => {
-        crudService.getOpponents(user.id, setOppenentList);
-    }, [crudService, user]);
-
-    useEffect(() => {
-        crudService.getMessages(user.id, opponentId, setMessages);
+        if (user) {
+            crudService.getMessages(user.id, opponentId, setMessages);
+        }
     }, [opponentId, user, crudService])
     
     return(
