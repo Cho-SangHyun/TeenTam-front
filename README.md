@@ -37,14 +37,33 @@
 --- | --- |
 
 ### 게시글 목록 페이지
-<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223098591-da115a98-362c-4c94-890f-5f0874fa155e.png" width="70%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223100866-32e8b3ed-dc3b-4643-ba9b-dfcf0ff6e943.png" width="65%"/></p>
 
 ### 게시글 상세 페이지
-<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223098582-948e06fa-9df6-4e1a-99da-4ae7902b776a.png" width="70%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223098582-948e06fa-9df6-4e1a-99da-4ae7902b776a.png" width="65%"/></p>
 
+### 게시글 검색
+  
+![image.jpg1](https://user-images.githubusercontent.com/65762283/223101083-f6e98a6d-91e7-435c-ab70-f3726c75e1a5.png) |![image.jpg2](https://user-images.githubusercontent.com/65762283/223101072-1404348e-3b75-4535-9e45-268159a0a0e3.png)
+--- | --- |
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223101267-a0c7464c-589e-4b95-a812-874aa2f9b549.png" width="65%"/></p>
 
+### 쪽지 주고받기
+  
+![image.jpg1](https://user-images.githubusercontent.com/65762283/223102022-5f22c328-5086-4623-b88e-0f23c6020da2.png) |![image.jpg2](https://user-images.githubusercontent.com/65762283/223102032-f6a90dbd-72ca-461d-90dc-d8ea482b0e65.png)
+--- | --- |
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223102031-6cf840d6-b729-457a-ab29-539e2503e3b4.png" width="65%"/></p>
 
+### 시간표 페이지
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223103427-5470f646-f7f4-4c16-a57e-3500c799b8e9.png" width="65%"/></p>
 
+### 시간표 생성 및 수정
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223108325-3c6e5545-db19-4e34-ae2e-84f5b7f9ebb0.gif" width="65%"/></p>
+
+### 마이페이지
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223108943-3a5f1b59-acff-4ef8-ad92-40f2c1bd45fc.png" width="65%"/></p>
+
+<br />  
 
 ## ⚙️ 사용방법
 1. `Node.js` 설치(LTS버전으로) ([링크](https://nodejs.org/ko/))    
