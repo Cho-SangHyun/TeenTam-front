@@ -26,6 +26,25 @@
 <br />  
 
 ## 👀 둘러보기
+### 메인페이지 (로그인 전, 로그인 후)  
+
+![image.jpg1](https://user-images.githubusercontent.com/65762283/223095482-83093cff-9049-41a6-bc76-c5ccff287f22.png) |![image.jpg2](https://user-images.githubusercontent.com/65762283/223096234-d4d81eae-2c25-4772-af9f-0d8e1b063c89.png)
+--- | --- | 
+
+### 로그인 / 회원가입 페이지
+  
+![image.jpg1](https://user-images.githubusercontent.com/65762283/223097336-e391b4d2-5955-4fe0-a221-a5ede738b89e.png) |![image.jpg2](https://user-images.githubusercontent.com/65762283/223097420-ec0dd7db-5c93-4be2-9ec9-411a03b30ead.png)
+--- | --- |
+
+### 게시글 목록 페이지
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223098591-da115a98-362c-4c94-890f-5f0874fa155e.png" width="70%"/></p>
+
+### 게시글 상세 페이지
+<p align="center"><img src="https://user-images.githubusercontent.com/65762283/223098582-948e06fa-9df6-4e1a-99da-4ae7902b776a.png" width="70%"/></p>
+
+
+
+
 
 ## ⚙️ 사용방법
 1. `Node.js` 설치(LTS버전으로) ([링크](https://nodejs.org/ko/))    
